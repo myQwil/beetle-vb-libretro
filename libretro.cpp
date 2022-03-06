@@ -1956,6 +1956,7 @@ static int Load(const uint8_t *data, size_t size)
          break;
 
       case VB3DMODE_SIDEBYSIDE:
+      case VB3DMODE_CROSSEYE:
          EmulatedVB.nominal_width  = 384 * 2 + sbs_separation;
          EmulatedVB.nominal_height = 224;
          EmulatedVB.fb_width       = 384 * 2 + sbs_separation;
@@ -2264,6 +2265,8 @@ static void check_variables(void)
          setting_vb_3dmode = VB3DMODE_CSCOPE;
       else if (strcmp(var.value, "side-by-side") == 0)
          setting_vb_3dmode = VB3DMODE_SIDEBYSIDE;
+      else if (strcmp(var.value, "cross-eye") == 0)
+         setting_vb_3dmode = VB3DMODE_CROSSEYE;
       else if (strcmp(var.value, "vli") == 0)
          setting_vb_3dmode = VB3DMODE_VLI;
       else if (strcmp(var.value, "hli") == 0)

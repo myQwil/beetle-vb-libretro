@@ -77,11 +77,12 @@ struct retro_core_option_definition option_defs_tr[] = {
    {
       "vb_3dmode",
       "3B modu",
-      "3B modunu seçin. Anaglif - klasik çift lens renkli camlarla birlikte kullanılır. Cyberscope - CyberScope ile kullanılmak üzere tasarlanan 3B cihaz. sidebyside - sol göz resmi solda ve sağ göz resmi sağda görüntülenir. vli - Dikey çizgiler sol ve sağ görünüm arasında değişir. hli - Yatay çizgiler sol ve sağ görünüm arasında değişir.",
+      "3B modunu seçin. Anaglif - klasik çift lens renkli camlarla birlikte kullanılır. Cyberscope - CyberScope ile kullanılmak üzere tasarlanan 3B cihaz. sidebyside - sol göz resmi solda ve sağ göz resmi sağda görüntülenir. crosseye - sidebyside karşı taraftaki görüntüler. vli - Dikey çizgiler sol ve sağ görünüm arasında değişir. hli - Yatay çizgiler sol ve sağ görünüm arasında değişir.",
       {
          { "anaglyph",  "Anaglif" },
          { "cyberscope",  NULL },
          { "side-by-side",  NULL },
+         { "cross-eye",  NULL },
          { "vli", NULL},
          { "hli", NULL},
          { NULL, NULL },

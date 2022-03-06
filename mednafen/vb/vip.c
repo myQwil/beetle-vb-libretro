@@ -81,6 +81,7 @@ static void CopyFBColumnToTarget_Anaglyph(void) NO_INLINE;
 static void CopyFBColumnToTarget_AnaglyphSlow(void) NO_INLINE;
 static void CopyFBColumnToTarget_CScope(void) NO_INLINE;
 static void CopyFBColumnToTarget_SideBySide(void) NO_INLINE;
+static void CopyFBColumnToTarget_CrossEye(void) NO_INLINE;
 static void CopyFBColumnToTarget_VLI(void) NO_INLINE;
 static void CopyFBColumnToTarget_HLI(void) NO_INLINE;
 static void (*CopyFBColumnToTarget)(void) = NULL;
@@ -251,6 +252,10 @@ static void Recalc3DModeStuff(bool non_rgb_output)
 
       case VB3DMODE_SIDEBYSIDE:
          CopyFBColumnToTarget = CopyFBColumnToTarget_SideBySide;
+         break;
+
+      case VB3DMODE_CROSSEYE:
+         CopyFBColumnToTarget = CopyFBColumnToTarget_CrossEye;
          break;
 
       case VB3DMODE_VLI:
@@ -854,6 +859,7 @@ void VIP_StartFrame(EmulateSpecStruct *espec)
          break;
 
       case VB3DMODE_SIDEBYSIDE:
+      case VB3DMODE_CROSSEYE:
          espec->DisplayRect.w = 768 + VBSBS_Separation;
          espec->DisplayRect.h = 224;
          break;
@@ -1211,6 +1217,16 @@ static void CopyFBColumnToTarget_SideBySide(void)
       CopyFBColumnToTarget_SideBySide_BASE(DisplayActive, 0, 0 ^ VB3DReverse);
    else
       CopyFBColumnToTarget_SideBySide_BASE(DisplayActive, 1, 1 ^ VB3DReverse);
+}
+
+static void CopyFBColumnToTarget_CrossEye(void)
+{
+   const int lr = (DisplayRegion & 2) >> 1;
+
+   if(!lr)
+      CopyFBColumnToTarget_SideBySide_BASE(DisplayActive, 0, 1 ^ VB3DReverse);
+   else
+      CopyFBColumnToTarget_SideBySide_BASE(DisplayActive, 1, 0 ^ VB3DReverse);
 }
 
 static INLINE void CopyFBColumnToTarget_VLI_BASE(const bool DisplayActive_arg, const int lr, const int dest_lr)
